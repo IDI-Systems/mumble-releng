@@ -65,16 +65,22 @@ function prepare {
 }
 
 function build {
+    if [ "${ARCH}" == "x86" ]; then
+		VS_PLATFORM="Win32"
+	elif [ "${ARCH}" == "amd64" ]; then
+		VS_PLATFORM="x64"
+	fi
+    
 	cd src/share/utf8
-	cmd /c msbuild utf8_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET}
+	cmd /c msbuild utf8_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM}
 	cd ../../..
 
 	cd src/share/win_utf8_io
-	cmd /c msbuild win_utf8_io_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET}
+	cmd /c msbuild win_utf8_io_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM}
 	cd ../../..
 
 	cd src/libFLAC
-	cmd /c msbuild libFLAC_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET}
+	cmd /c msbuild libFLAC_static.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM}
 	cd ../..
 
 	if [ "${MUMBLE_BUILD_CONFIGURATION}" == "Release" ]; then

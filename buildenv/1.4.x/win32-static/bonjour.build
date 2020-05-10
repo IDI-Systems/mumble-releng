@@ -53,9 +53,14 @@ function prepare {
 }
 
 function build {
+    if [ "${ARCH}" == "x86" ]; then
+		VS_PLATFORM="Win32"
+	elif [ "${ARCH}" == "amd64" ]; then
+		VS_PLATFORM="x64"
+	fi
 	# Build the DLLStub.
 	cd mDNSWindows/DLLStub
-	cmd /c msbuild DLLStub.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET}
+	cmd /c msbuild DLLStub.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM}
 }
 
 function install {

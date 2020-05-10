@@ -31,12 +31,19 @@ function prepare {
 	  sed -i -re "s,<ClCompile>,<ClCompile>\n      <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>,g" libvorbis/libvorbis_static.vcxproj
 	  sed -i -re "s,<ClCompile>,<ClCompile>\n      <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>,g" libvorbisfile/libvorbisfile_static.vcxproj
 	fi
+    sed -i -e 's,<DebugInformationFormat>EditAndContinue</DebugInformationFormat>,<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>,g' libvorbis/libvorbis_static.vcxproj
+    sed -i -e 's,<DebugInformationFormat>EditAndContinue</DebugInformationFormat>,<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>,g' libvorbisfile/libvorbisfile_static.vcxproj
 	cd ../..
 }
 
 function build {
+    if [ "${ARCH}" == "x86" ]; then
+		VS_PLATFORM="Win32"
+	elif [ "${ARCH}" == "amd64" ]; then
+		VS_PLATFORM="x64"
+	fi
 	cd win32/VS2010
-	cmd /c msbuild.exe vorbis_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET}
+	cmd /c msbuild.exe vorbis_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM} /p:DebugInformationFormat=ProgramDatabase
 	cd ../..
 }
 

@@ -30,6 +30,12 @@ function prepare {
 }
 
 function build {
+    if [ "${ARCH}" == "x86" ]; then
+		VS_PLATFORM="Win32"
+	elif [ "${ARCH}" == "amd64" ]; then
+		VS_PLATFORM="x64"
+	fi
+    
 	if [ "${MUMBLE_BUILD_CONFIGURATION}" == "Release" ]; then
 		BUILD_CFG="Static Release"
 	elif [ "${MUMBLE_BUILD_CONFIGURATION}" == "Debug" ]; then
@@ -37,7 +43,7 @@ function build {
 	fi
 
 	cd build_windows
-	cmd /c msbuild.exe Berkeley_DB_vs2010.sln /p:Configuration="${BUILD_CFG}" /p:PlatformToolset=${MUMBLE_VSTOOLSET} /target:db
+	cmd /c msbuild.exe Berkeley_DB_vs2010.sln /p:Configuration="${BUILD_CFG}" /p:PlatformToolset=v140 /target:db /p:Platform=${VS_PLATFORM}
 	cd ..
 }
 
