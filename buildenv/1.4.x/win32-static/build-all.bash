@@ -5,43 +5,43 @@
 # <http://mumble.info/mumble-releng/LICENSE>.
 
 # Binary tools
-#./nasm.build
-#./cmake.build
-#./jom.build
-#./python.build
-#./perl.build
-#./wix.build
-#
-#./boost.build
-#./openssl.build
-#./protobuf.build
+./nasm.build
+./cmake.build
+./jom.build
+./python.build
+./perl.build
+./wix.build
 
-#./libogg.build
-#./libvorbis.build
-#./libflac.build
-#./libsndfile.build
-#
-#./bonjour.build
-#
-#./zlib.build
-#
-#./libpng.build
-#./libjpeg-turbo.build
-#
-#./sqlite3.build
-#./mariadb-client.build
-#
-#./freetype.build
-#./harfbuzz-ng.build
-#
-#./pcre.build
+./boost.build
+./openssl.build
+./protobuf.build
 
-#./qt5.build
+./libogg.build
+./libvorbis.build
+./libflac.build
+./libsndfile.build
 
-#./libmcpp.build
-#./bzip2.build
-#./berkeleydb.build
-#./expat.build
+./bonjour.build
+
+./zlib.build
+
+./libpng.build
+./libjpeg-turbo.build
+
+./sqlite3.build
+./mariadb-client.build
+
+./freetype.build
+./harfbuzz-ng.build
+
+./pcre.build
+
+./qt5.build
+
+./libmcpp.build
+./bzip2.build
+./berkeleydb.build
+./expat.build
 #./zeroc-ice.build
 
 ./asio.build
