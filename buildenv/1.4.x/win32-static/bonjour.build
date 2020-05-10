@@ -60,7 +60,7 @@ function build {
 	fi
 	# Build the DLLStub.
 	cd mDNSWindows/DLLStub
-	cmd /c msbuild DLLStub.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=$(PLATFORMTOOLSET) /p:Platform=${VS_PLATFORM}
+	cmd /c msbuild DLLStub.vcxproj /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET} /p:Platform=${VS_PLATFORM}
 }
 
 function install {

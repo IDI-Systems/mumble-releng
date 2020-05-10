@@ -46,7 +46,7 @@ function build {
 	./configure --host=i686-w64-mingw32 --prefix=${MUMBLE_SNDFILE_PREFIX} --disable-shared --enable-static
 
 	cd win32/VS2010
-	cmd /c msbuild.exe libogg_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=$(PLATFORMTOOLSET) /p:Platform=${VS_PLATFORM}
+	cmd /c msbuild.exe libogg_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=${MUMBLE_VSTOOLSET} /p:Platform=${VS_PLATFORM}
 	cd ../..
 }
 
