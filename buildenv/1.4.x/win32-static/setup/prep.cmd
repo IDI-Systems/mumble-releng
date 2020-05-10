@@ -219,47 +219,9 @@ CALL "%DXSDK_DIR%\Utilities\bin\dx_setenv.cmd" %ARCH% >NUL
 GOTO FINALIZE
 
 :VS2017
-IF %XPCOMPAT%==1 GOTO VS2017XP
 TITLE MumbleBuild MSVC2017 (v141)
 SET MUMBLE_VSTOOLSET=v141
 CALL "%PROGPATH%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %ARCH% >NUL
-GOTO FINALIZE
-
-:VS2017XP
-TITLE MumbleBuild MSVC2017 (v141_xp)
-SET MUMBLE_VSTOOLSET=v141_xp
-CALL "%PROGPATH%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %ARCH% >NUL
-:: Set up the environment such that using cl.exe and friends
-:: from the command line will work as if we were using the "v141_xp"
-:: toolset in Visual Studio.
-::
-:: Technically, this uses a specially re-packaged Windows 7 SDK
-:: called "v7.1A", and sets a preprocessor define, _USING_V110_SDK71_
-:: (it's called V110 for v110_xp, v120_xp, v140_xp and v141_xp).
-set INCLUDE=%PROGPATH%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%
-set PATH=%PROGPATH%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%
-set LIB=%PROGPATH%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%
-set CL=/D_USING_V110_SDK71_ %CL%
-:: We call dx_setenv after vcvarsall to avoid accidently using the
-:: DirectX bundled with MSVC2017's Windows 10 SDK.
-::
-:: When building using the v141_xp toolset, the latest supported
-:: Windows SDK is the Windows v7.1A SDK, which is a specially
-:: re-packaged version of the Windows 7 SDK meant for use in the
-:: XP compatibility toolsets for Visual Studio 2012, 2013, 2015 and 2017
-:: (i.e. v141_xp).
-::
-:: Since the Windows 10 SDK is unsupported for Windows XP use,
-:: the SDK-bundled DirectX is probably also off-limits. To ensure
-:: we're using the non-bundled "June 2010" variant, we call its
-:: dx_setenv.cmd *after* vcvarsall, to ensure the bin, lib and include
-:: environment variables come before the ones from the Windows 10 SDK.
-::
-:: Additionally, we also call it after setting up the INCLUDE, PATH, LIB
-:: and CL environment variables to use the Windows v7.1A SDK (for XP
-:: compatibility) to ensure that the DirextX headers from the Windows
-:: v7.1A SDK does not interfere with the June 2010 variant.
-CALL "%DXSDK_DIR%\Utilities\bin\dx_setenv.cmd" %ARCH% >NUL
 GOTO FINALIZE
 
 :FINALIZE
