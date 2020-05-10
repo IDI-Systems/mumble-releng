@@ -43,7 +43,7 @@ function build {
 	fi
 
 	cd build_windows
-	cmd /c msbuild.exe Berkeley_DB_vs2010.sln /p:Configuration="${BUILD_CFG}" /p:PlatformToolset=v140 /target:db /p:Platform=${VS_PLATFORM}
+	cmd /c msbuild.exe Berkeley_DB_vs2010.sln /p:Configuration="${BUILD_CFG}" /p:PlatformToolset=$(PLATFORMTOOLSET) /target:db /p:Platform=${VS_PLATFORM}
 	cd ..
 }
 

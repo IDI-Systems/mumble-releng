@@ -43,7 +43,7 @@ function build {
 		VS_PLATFORM="x64"
 	fi
 	cd win32/VS2010
-	cmd /c msbuild.exe vorbis_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=v140 /p:Platform=${VS_PLATFORM} /p:DebugInformationFormat=ProgramDatabase
+	cmd /c msbuild.exe vorbis_static.sln /p:Configuration=${MUMBLE_BUILD_CONFIGURATION} /p:PlatformToolset=$(PLATFORMTOOLSET) /p:Platform=${VS_PLATFORM} /p:DebugInformationFormat=ProgramDatabase
 	cd ../..
 }
 
